@@ -1,14 +1,10 @@
 
 package com.example.restservice;
 
-        import java.awt.print.Book;
-        import java.util.concurrent.atomic.AtomicLong;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-        import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
-        import org.jgrapht.graph.DefaultWeightedEdge;
-        import org.jgrapht.graph.SimpleWeightedGraph;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.web.bind.annotation.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 public class GreetingController {

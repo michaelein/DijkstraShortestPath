@@ -1,16 +1,9 @@
 package com.example.restservice;
 
-import org.jgrapht.Graph;
-import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
-import org.jgrapht.graph.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.jgrapht.graph.DefaultWeightedEdge;
+import org.jgrapht.graph.SimpleWeightedGraph;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Component;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.stream.IntStream;
 
 @SpringBootApplication
 public class RestServiceApplication {
