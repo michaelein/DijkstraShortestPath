@@ -44,11 +44,12 @@ public class RestServiceApplication {
 
 	public static void main(String[] args) {
 
-		SimpleWeightedGraph<String, DefaultWeightedEdge> dg = createDiGraph();
+
+	/*	SimpleWeightedGraph<String, DefaultWeightedEdge> dg = createDiGraph();
 		DijkstraShortestPath<String, DefaultWeightedEdge> dp = new DijkstraShortestPath<>(dg);
 		dp.getPath("v1", "v4").getEdgeList().stream().forEach(System.out::println);
 
-		int t=8;
+		int t=8;*/
 		SpringApplication.run(RestServiceApplication.class, args);
 
 	}

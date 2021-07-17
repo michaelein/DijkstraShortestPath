@@ -4,6 +4,9 @@ package com.example.restservice;
         import java.awt.print.Book;
         import java.util.concurrent.atomic.AtomicLong;
 
+        import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+        import org.jgrapht.graph.DefaultWeightedEdge;
+        import org.jgrapht.graph.SimpleWeightedGraph;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +15,8 @@ public class GreetingController {
 
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
+    @Autowired
+    private WeightedGraph weightedGraph;
 
   /*  @GetMapping("/greeting")
     public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
