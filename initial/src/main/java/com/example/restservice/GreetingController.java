@@ -12,6 +12,8 @@ public class GreetingController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
     @Autowired
+    public ParseJSON  parseJSON ;
+    @Autowired
     private WeightedGraph weightedGraph;
 
   /*  @GetMapping("/greeting")
