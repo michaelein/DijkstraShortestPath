@@ -1,95 +1,78 @@
 package com.example.restservice;
 
 
-import java.io.*;
-import java.nio.file.Path;
-import java.util.Iterator;
-
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jayway.jsonpath.JsonPath;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.springframework.beans.factory.annotation.Value;
+import com.google.gson.Gson;
+import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
+import org.springframework.util.FileCopyUtils;
 
-import java.io.FileReader;
-import java.util.Iterator;
-import java.util.Map;
+import java.io.*;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 
-import org.json.simple.parser.*;
-
-/*
+class Attributes {
+    @JsonProperty("weight")
+    double weight;
+}
+class Links {
+    Attributes attributes;
+    @JsonProperty("source")
+    public String source;
+    @JsonProperty("target")
+    String target;
+}
+class Graph {
+    @JsonProperty("name")
+    public java.lang.String name;
+    @JsonProperty("version")
+    public java.lang.Number version;
+}
 class SomeClass
 {
-
     @JsonProperty("directed")
     public boolean directed;
-    public class graph {
-        @JsonProperty("name")
-        public java.lang.String name;
-        @JsonProperty("version")
-        public java.lang.Number version;
-    }
+    Graph graph;
+    Links[] links;
+}
+class Employee implements Serializable
+{
+    private String           firstName;
+    private String           lastName;
+    private transient String confidentialInfo;
 
+    //Setters and Getters
+}
 
-    public class links {
-    public    class attributes {
-        @JsonValue
-            int weight;
-        }
-        @JsonValue
-        public String source;
-        @JsonValue
-        String target;
-    }
-}*/
 @Service
 public class ParseJSON
 {
-String p="C:\\Users\\DESKTOP\\gs-rest-service\\data.json";//new File(p)
-
-    public ParseJSON() {
-        // parsing file "JSONExample.json"
-        Object obj = null;
-        try {
-            obj = new JSONParser().parse(new FileReader( p));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+    public static String asString(Resource resource) {
+        try (Reader reader = new InputStreamReader(resource.getInputStream(), UTF_8)) {
+            return FileCopyUtils.copyToString(reader);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UncheckedIOException(e);
         }
+    }
 
-        // typecasting obj to JSONObject
-        JSONObject jo = (JSONObject) obj;
-        // getting phoneNumbers
-        JSONArray ja = (JSONArray) jo.get("links");
-        // iterating phoneNumbers
-        // getting phoneNumbers
-       // JSONArray ja = (JSONArray) jo.get("phoneNumbers");
+    public ParseJSON()
+    {
+        String jsonString_ = "{'id':1001, 'firstName':'Lokesh', 'lastName':'Gupta', 'email':'howtodoinjava@gmail.com'}";
+        Gson gson = new Gson();
+        Employee empObject_ = gson.fromJson(jsonString_, Employee.class);
 
-        // iterating phoneNumbers
-        Iterator itr2 = ja.iterator();
+        String msg;
 
-        while (itr2.hasNext())
-        {
-            Iterator itr1 = ((Map) itr2.next()).entrySet().iterator();
-            while (itr1.hasNext()) {
-               // Map.Entry pair = itr1.next();
-                System.out.println( itr1.next());
-            }
-        }
+        ResourceLoader resourceLoader = new DefaultResourceLoader();
+        Resource resource = resourceLoader.getResource("data.json");
+        String jsonString=asString(resource);
 
 
 
+        SomeClass empObject = gson.fromJson(jsonString, SomeClass.class);
+
+        System.out.println(empObject.links);
     }
 }
