@@ -42,7 +42,6 @@ public class WeightedGraph {
     public void createDijGraph()
     {
         SomeClass someClass= parseJSON.GetSome();
-       // String h=someClass.links[0].source;
         DijkstraGrapg = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
         for (int i = 0; i < someClass.links.length; i++) {
             setWeights(someClass.links[i]);
