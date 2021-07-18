@@ -35,7 +35,7 @@ public class RestServiceApplication {
 		return g;
 	}
 
-	public static void main(String[] args) { 
+	public static void main(String[] args) {
 
 		SpringApplication.run(RestServiceApplication.class, args);
 
@@ -43,3 +43,4 @@ public class RestServiceApplication {
 
 }
 
+ 

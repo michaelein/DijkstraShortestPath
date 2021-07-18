@@ -1,12 +1,8 @@
 package com.example.restservice;
 
 
-import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.graph.SimpleWeightedGraph;
 import org.springframework.stereotype.Service;
-import java.util.stream.IntStream;
 
-import java.util.LinkedList;
 
 @Service
 public class GreetingService {

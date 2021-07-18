@@ -43,7 +43,7 @@ class Employee implements Serializable
 @Service
 public class ParseJSON
 {
-    public static String asString(Resource resource) {
+    public String asString(Resource resource) {
         try (Reader reader = new InputStreamReader(resource.getInputStream(), UTF_8)) {
             return FileCopyUtils.copyToString(reader);
         } catch (IOException e) {
