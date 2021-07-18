@@ -30,13 +30,7 @@ class Graph {
     @JsonProperty("version")
     public java.lang.Number version;
 }
-class SomeClass
-{
-    @JsonProperty("directed")
-    public boolean directed;
-    Graph graph;
-    Links[] links;
-}
+
 class Employee implements Serializable
 {
     private String           firstName;
@@ -56,7 +50,7 @@ public class ParseJSON
             throw new UncheckedIOException(e);
         }
     }
-
+    public SomeClass empObject ;
     public ParseJSON()
     {
         String jsonString_ = "{'id':1001, 'firstName':'Lokesh', 'lastName':'Gupta', 'email':'howtodoinjava@gmail.com'}";
@@ -68,11 +62,12 @@ public class ParseJSON
         ResourceLoader resourceLoader = new DefaultResourceLoader();
         Resource resource = resourceLoader.getResource("data.json");
         String jsonString=asString(resource);
+        this.empObject = gson.fromJson(jsonString, SomeClass.class);
+       // System.out.println(empObject.links);
+    }
 
-
-
-        SomeClass empObject = gson.fromJson(jsonString, SomeClass.class);
-
-        System.out.println(empObject.links);
+    public SomeClass GetSome()
+    {
+        return this.empObject;
     }
 }
