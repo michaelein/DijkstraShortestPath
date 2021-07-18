@@ -1,6 +1,5 @@
 package com.example.restservice;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.Gson;
 import org.springframework.core.io.DefaultResourceLoader;
@@ -8,9 +7,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
-
 import java.io.*;
-
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 class Attributes {
@@ -31,15 +28,6 @@ class Graph {
     public java.lang.Number version;
 }
 
-class Employee implements Serializable
-{
-    private String           firstName;
-    private String           lastName;
-    private transient String confidentialInfo;
-
-    //Setters and Getters
-}
-
 @Service
 public class ParseJSON
 {
@@ -53,19 +41,12 @@ public class ParseJSON
     public SomeClass empObject ;
     public ParseJSON()
     {
-        String jsonString_ = "{'id':1001, 'firstName':'Lokesh', 'lastName':'Gupta', 'email':'howtodoinjava@gmail.com'}";
         Gson gson = new Gson();
-        Employee empObject_ = gson.fromJson(jsonString_, Employee.class);
-
-        String msg;
-
         ResourceLoader resourceLoader = new DefaultResourceLoader();
         Resource resource = resourceLoader.getResource("data.json");
         String jsonString=asString(resource);
         this.empObject = gson.fromJson(jsonString, SomeClass.class);
-       // System.out.println(empObject.links);
     }
-
     public SomeClass GetSome()
     {
         return this.empObject;

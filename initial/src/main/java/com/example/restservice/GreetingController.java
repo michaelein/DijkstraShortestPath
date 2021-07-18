@@ -1,49 +1,44 @@
-
 package com.example.restservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.concurrent.atomic.AtomicLong;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class GreetingController {
 
-    private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
     @Autowired
     public ParseJSON  parseJSON ;
+    @Autowired
+    private WeightedGraph weightedGraph;
 
-  //  @Autowired
- //   private WeightedGraph weightedGraph;
+    //http://localhost:8080/api/getWeighted?start=d1263a41-5e00-4d6b-9611-0af0cdf371ce&end=f85456a2-4869-4678-b0eb-d855db8c2a1c
+    @GetMapping("/api/getWeighted")
+    @ResponseBody
+    public String getWeighted(@RequestParam(name = "start") String start, @RequestParam String end) {
 
-  /*  @GetMapping("/greeting")
-    public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return new Greeting(counter.incrementAndGet(), String.format(template, name));
-    }*/
-   /*  @Autowired
-    private GreetingService greetingService;
-    @GetMapping("/greeting__")
-    public String greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return greetingService.getAge();
-    }*/
-    @GetMapping("/greeting")
-    public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return new Greeting(counter.incrementAndGet(), String.format(template, name));
+        double weight=  weightedGraph.getWeightBetweenNodes(start,end);
+        String StringToSend="Start:" + start + " End: " + end+" Weight: ";
+        if (weight==0) {
+            return StringToSend+ " Unable to find one vertex";
+        }
+        return StringToSend + weight;
     }
-    @GetMapping("/greeting_")
-    public Greeting greeting_(@RequestParam(value = "name", defaultValue = "World") String name,@RequestParam(value = "name2", defaultValue = "World") String name2) {
-        return new Greeting(counter.incrementAndGet(), String.format(template, name,name2));
-    }
-    @GetMapping({"/myfoos/optional", "/myfoos/optional/{id}"})
+    //http://localhost:8080/api/getShort?start=d1263a41-5e00-4d6b-9611-0af0cdf371ce&end=f85456a2-4869-4678-b0eb-d855db8c2a1c
+    @GetMapping("/api/getShort")
     @ResponseBody
-    public String getFooByOptionalId(@PathVariable(required = false) String id){
-        return "ID: " + id;
+    public String getShort(@RequestParam(name = "start") String start, @RequestParam String end) {
+        String Res=  weightedGraph.getShortBetweenNodes(start,end);
+        return "Start:" + start + " End: " + end+" path: "+Res;// true or false to users
     }
-    @GetMapping("/api/foos")
+    //http://localhost:8080/api/updateWeight?start=d1263a41-5e00-4d6b-9611-0af0cdf371ce&end=f85456a2-4869-4678-b0eb-d855db8c2a1c&weight=5
+    @GetMapping("/api/updateWeight")
     @ResponseBody
-    public String addFoo(@RequestParam(name = "id") int fooId, @RequestParam String name) {
-        return "ID: " + fooId + " Name: " + name;
+    public String updateWeight(@RequestParam(name = "start") String start, @RequestParam String end,@RequestParam double weight) {
+        boolean res=  weightedGraph.UpdateWeight(start,end ,weight);
+        return "updateWeight Start:" + start + " End: " + end+" updated: "+res;// true or false to users
     }
 
 }
