@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 
 @Service
 public class WeightedGraph {
+    Links links;
     @Autowired
     public ParseJSON  parseJSON ;
 
@@ -51,6 +52,8 @@ public class WeightedGraph {
         dp = new DijkstraShortestPath<>(DijkstraGrapg);
         dp.getPath("d1263a41-5e00-4d6b-9611-0af0cdf371ce", "f85456a2-4869-4678-b0eb-d855db8c2a1c").getEdgeList().stream().forEach(System.out::println);
         System.out.println( dp.getPath("d1263a41-5e00-4d6b-9611-0af0cdf371ce", "f85456a2-4869-4678-b0eb-d855db8c2a1c").getWeight());
+        links = new Links();
+        links.attributes = new Attributes();
     }
     public double getWeightBetweenNodes(String s, String d)
     {
@@ -68,14 +71,11 @@ public class WeightedGraph {
         }
        return dp.getPath(s, d).getEdgeList().toString();
     }
-    public boolean UpdateWeight(String s, String d ,double wieght )
+    public boolean UpdateWeight(String s, String d ,double wight )
     {
-        Links links = new Links();
-        links.attributes = new Attributes();
         links.source =s;
         links.target =d;
-        links.attributes.weight =wieght;
-
+        links.attributes.weight =wight;
         if (!DijkstraGrapg.containsVertex(s) || !DijkstraGrapg.containsVertex(d))
         {
             System.out.println("The verticals are equal");
