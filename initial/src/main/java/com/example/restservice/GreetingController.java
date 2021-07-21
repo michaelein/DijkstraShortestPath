@@ -34,7 +34,7 @@ public class GreetingController {
         return "Start:" + start + " End: " + end+" path: "+Res;// true or false to users
     }
     //http://localhost:8080/api/updateWeight?start=d1263a41-5e00-4d6b-9611-0af0cdf371ce&end=f85456a2-4869-4678-b0eb-d855db8c2a1c&weight=5
-    @GetMapping("/api/updateWeight")//TODO Synchronization is not maintained by the library --important !!!
+    @GetMapping("/api/updateWeight")//TODO Synchronization if the library does not maintain it--important !!!
     @ResponseBody
     public String updateWeight(@RequestParam(name = "start") String start, @RequestParam String end,@RequestParam double weight) {
         boolean res=  weightedGraph.UpdateWeight(start,end ,weight);
