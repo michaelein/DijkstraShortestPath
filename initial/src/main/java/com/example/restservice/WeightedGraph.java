@@ -9,12 +9,11 @@ import javax.annotation.PostConstruct;
 
 @Service
 public class WeightedGraph {
-    Links links;
     @Autowired
     public ParseJSON  parseJSON ;
-
     SimpleWeightedGraph<String, DefaultWeightedEdge> DijkstraGrapg;
     DijkstraShortestPath<String, DefaultWeightedEdge> dp;
+    Links links;
 
     boolean setWeights(Links links)
     {
@@ -78,7 +77,7 @@ public class WeightedGraph {
         links.attributes.weight =wight;
         if (!DijkstraGrapg.containsVertex(s) || !DijkstraGrapg.containsVertex(d))
         {
-            System.out.println("The verticals are equal");
+            System.out.println("The vertices are equal");
             return false;
         }
         return setWeights(links);

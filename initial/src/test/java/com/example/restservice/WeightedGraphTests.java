@@ -7,7 +7,7 @@ import org.springframework.util.Assert;
 import org.testng.annotations.BeforeTest;
 
 @SpringBootTest
-public class RestServiceApplicationTests {
+public class WeightedGraphTests {
 
 	@Autowired
 	private GreetingController controller;
@@ -36,13 +36,13 @@ public class RestServiceApplicationTests {
 		weightedGraph.setWeights(links);
 	}
 	@Test
-	public void WeightPositiveTest() {
+	public void WeightPositiveTest_WeightedGraph() {
 		setup();
 		double res =weightedGraph.getWeightBetweenNodes("v1", "v4");
 		Assert.state(weightedGraph.getWeightBetweenNodes("v1", "v4") == 7);
 	}
 	@Test
-	public void WeightNegativeTest() {
+	public void WeightNegativeTest_WeightedGraph() {
 		setup();
 		double res =weightedGraph.getWeightBetweenNodes("v1", "v4");
 		Assert.state(weightedGraph.getWeightBetweenNodes("v1", "v4") != 6);
