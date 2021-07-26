@@ -41,10 +41,10 @@ public class WeightedGraph {
     @PostConstruct
     public void createDijGraph()
     {
-        SomeClass someClass= parseJSON.GetSome();
+        SomeClass DijkstraClass= parseJSON.GetSome();
         DijkstraGrapg = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
-        for (int i = 0; i < someClass.links.length; i++) {
-            setWeights(someClass.links[i]);
+        for (int i = 0; i < DijkstraClass.links.length; i++) {
+            setWeights(DijkstraClass.links[i]);
         }
 
         //--forTest
