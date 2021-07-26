@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
-public class GreetingController {
+public class DijkstraController {
 
     @Autowired
     public ParseJSON  parseJSON ;

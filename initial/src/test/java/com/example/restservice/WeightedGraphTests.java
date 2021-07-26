@@ -10,7 +10,7 @@ import org.testng.annotations.BeforeTest;
 public class WeightedGraphTests {
 
 	@Autowired
-	private GreetingController controller;
+	private DijkstraController controller;
 
 	@Autowired
 	private WeightedGraph weightedGraph;
